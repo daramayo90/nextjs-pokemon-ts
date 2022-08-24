@@ -1,9 +1,10 @@
 import { FC } from "react";
 import type { GetStaticProps } from "next";
-import { Card, Grid, Row, Text } from "@nextui-org/react";
+import { Grid } from "@nextui-org/react";
 import { pokeApi } from "../api";
 import { Layout } from "../components/layouts";
 import { SmallPokemon, PokemonListResponse } from "../interfaces";
+import { PokemonCard } from "../components/pokemon";
 
 interface Props {
   pokemons: SmallPokemon[];
@@ -14,20 +15,8 @@ const Home: FC<Props> = ({ pokemons }) => {
   return (
     <Layout title="Pokemons List">
       <Grid.Container gap={2} justify="flex-start">
-        {pokemons.map((poke) => (
-          <Grid xs={6} sm={3} md={2} xl={1} key={poke.id}>
-            <Card isHoverable isPressable>
-              <Card.Body css={{ p: 1 }}>
-                <Card.Image src={poke.img} width="100%" height={140} />
-              </Card.Body>
-              <Card.Footer>
-                <Row justify="space-between">
-                  <Text transform="capitalize">{poke.name}</Text>
-                  <Text>#{poke.id}</Text>
-                </Row>
-              </Card.Footer>
-            </Card>
-          </Grid>
+        {pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       </Grid.Container>
     </Layout>

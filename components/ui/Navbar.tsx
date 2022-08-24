@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const Navbar = () => {
   const { theme } = useTheme();
-  console.log(theme);
+
   return (
     <div
       style={{

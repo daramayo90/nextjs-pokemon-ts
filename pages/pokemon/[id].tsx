@@ -1,10 +1,9 @@
 import { FC } from "react";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
+import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import { Layout } from "../../components/layouts";
 import { pokeApi } from "../../api";
 import { PokemonFull } from "../../interfaces";
-import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 
 interface Props {
   pokemon: PokemonFull;

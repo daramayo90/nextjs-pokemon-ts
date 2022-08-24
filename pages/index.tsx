@@ -1,7 +1,8 @@
 import { FC } from "react";
-import type { NextPage, GetStaticProps } from "next";
-import { Layout } from "../components/layouts";
+import type { GetStaticProps } from "next";
+import { Card, Grid, Row, Text } from "@nextui-org/react";
 import { pokeApi } from "../api";
+import { Layout } from "../components/layouts";
 import { SmallPokemon, PokemonListResponse } from "../interfaces";
 
 interface Props {
@@ -12,13 +13,23 @@ interface Props {
 const Home: FC<Props> = ({ pokemons }) => {
   return (
     <Layout title="Pokemons List">
-      <ul>
-        {pokemons.map(({ id, name }) => (
-          <li key={id}>
-            #{id} - {name}
-          </li>
+      <Grid.Container gap={2} justify="flex-start">
+        {pokemons.map((poke) => (
+          <Grid xs={6} sm={3} md={2} xl={1} key={poke.id}>
+            <Card isHoverable isPressable>
+              <Card.Body css={{ p: 1 }}>
+                <Card.Image src={poke.img} width="100%" height={140} />
+              </Card.Body>
+              <Card.Footer>
+                <Row justify="space-between">
+                  <Text transform="capitalize">{poke.name}</Text>
+                  <Text>#{poke.id}</Text>
+                </Row>
+              </Card.Footer>
+            </Card>
+          </Grid>
         ))}
-      </ul>
+      </Grid.Container>
     </Layout>
   );
 };

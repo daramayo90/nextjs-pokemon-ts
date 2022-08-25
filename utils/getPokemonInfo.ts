@@ -6,13 +6,16 @@ import { PokemonFull } from '../interfaces';
  * instead of creating an hughe JSON file for each pokemon with all the info
  */
 const getPokemonInfo = async (nameOrId: string) => {
-  const { data } = await pokeApi.get<PokemonFull>(`/pokemon/${nameOrId}`);
-
-  return {
-    id: data.id,
-    name: data.name,
-    sprites: data.sprites,
-  };
+  try {
+    const { data } = await pokeApi.get<PokemonFull>(`/pokemon/${nameOrId}`);
+    return {
+      id: data.id,
+      name: data.name,
+      sprites: data.sprites,
+    };
+  } catch (e) {
+    return null;
+  }
 };
 
 export default getPokemonInfo;

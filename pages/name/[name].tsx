@@ -121,13 +121,29 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
   };
 };
 
+/**
+ * Data generated according the params in the getStaticPaths()
+ */
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { name } = params as { name: string };
 
+  const pokemon = await getPokemonInfo(name);
+
+  /** Incremental Static Generation (ISG) */
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      pokemon: await getPokemonInfo(name),
+      pokemon,
     },
+    revalidate: 86400, // Incremental Static Regeneration (ISR) - 24hs
   };
 };
 

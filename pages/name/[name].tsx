@@ -117,7 +117,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: pokemonNames.map((name) => ({
       params: { name },
     })),
-    fallback: false, // 'blocking': can receive infinitive params. false: the opposite (404)
+    fallback: 'blocking', // 'blocking': can receive infinitive params. false: the opposite (404)
   };
 };
 
